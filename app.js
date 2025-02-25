@@ -37,15 +37,23 @@ for (let btn of btns) {
     } else if (btnType === 'number') {
       // if no other numbers have been pressed, assign number to first value
       if (!firstValue) {
-        firstValue = e.target.id
+        firstValue = e.target.id.toString()
         display.textContent = firstValue
+
+      // what to do if a number has already been pressed
       } else if (firstValue) {
+
+        // if a number has already been pressed, but not an operator, new number will be continuation of first (5, then 5, is 55 etc)  
         if (!operatorValue) {
           firstValue = (firstValue + e.target.id)
           display.textContent = firstValue
+
+        // if an operator has been pressed, hitting a number begins the second number in equation  
         } else if (operatorValue && !secondValue) {
-          secondValue = e.target.id
+          secondValue = e.target.id.toString()
           display.textContent = secondValue
+
+        // if an operator is assigned and at least two numbers are pressed, it will continue the second number
         } else if (operatorValue && secondValue) {
           secondValue = (secondValue + e.target.id)
           display.textContent = secondValue
