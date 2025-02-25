@@ -22,9 +22,7 @@ for (let btn of btns) {
 
     // if clear button is selected, always reset display and clear all values
     if (btnType === "clear") {
-      firstValue = undefined
-      secondValue = undefined
-      operator = undefined
+      reset()
       currentValue = 0
       display.textContent = currentValue
 
@@ -59,7 +57,39 @@ for (let btn of btns) {
           display.textContent = secondValue
         }
       }
+    } else if (btnType === 'equal') {
+      operate()
     }
     
   })
+}
+
+function operate() {
+  if (operatorValue === "/" && secondValue === "0") {
+    display.textContent = "YOU FOOL"
+  } else if (!operatorValue || !secondValue) {
+    reset()
+    display.textContent = "E"
+  } else {
+    if (operatorValue === "+") {
+      currentValue = parseInt(firstValue) + parseInt(secondValue)
+    } else if (operatorValue === "-") {
+      currentValue = parseInt(firstValue) - parseInt(secondValue)
+    } else if (operatorValue === "*") {
+      currentValue = parseInt(firstValue) * parseInt(secondValue)
+    } else if (operatorValue === "/") {
+      currentValue = parseInt(firstValue) / parseInt(secondValue)
+    }
+    console.log(firstValue + operatorValue + secondValue)
+    display.textContent = Number(Math.round(currentValue * 1000) / 1000)
+    firstValue = currentValue
+    operatorValue = undefined
+    secondValue = undefined
+  }
+}
+
+function reset() {
+  firstValue = undefined
+  secondValue = undefined
+  operatorValue = undefined
 }
