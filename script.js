@@ -2,6 +2,9 @@ let firstNum
 let operator
 let secondNum
 let result = 0
+let numberBtns = document.querySelectorAll('.number')
+let operatorsBtns = document.querySelectorAll('.operator')
+let equalBtn = document.querySelector('.equals')
 
 const display = document.querySelector('.display')
 const buttons = document.querySelectorAll('.btn')
@@ -52,6 +55,11 @@ function clickHandler(input) {
     if (checkForNumber(input)) {
       firstNum = firstNum + input
       display.textContent = firstNum
+    } else {
+      if (input !== "=") {
+        operator = input
+        console.log(operator)
+      }
     }
   }
   
